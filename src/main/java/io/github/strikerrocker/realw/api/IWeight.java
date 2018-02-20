@@ -1,6 +1,5 @@
 package io.github.strikerrocker.realw.api;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public interface IWeight {
@@ -12,10 +11,5 @@ public interface IWeight {
 
     int getWeight();
 
-    int getWeight(Item item);
-
     int getStackWeight(ItemStack stack);
-
-    void replaceWeight(Item item, int newWeight);
-
 }
