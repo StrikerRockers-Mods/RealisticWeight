@@ -13,31 +13,27 @@ import static io.github.strikerrocker.realw.Constants.*;
 @Mod(modid = MOD_ID, name = NAME, version = VERSION)
 public class RealisticWeight {
 
-    @SidedProxy(serverSide = PACKAGE_LOCATION + "proxies.CommonProxy", clientSide = PACKAGE_LOCATION + "proxies.ClientProxy", modId = MOD_ID)
-    CommonProxy proxy;
+    @SidedProxy(serverSide = PACKAGE_LOCATION + ".proxies.CommonProxy", clientSide = PACKAGE_LOCATION + ".proxies.ClientProxy", modId = MOD_ID)
+    public static CommonProxy proxy;
 
     @Mod.Instance(MOD_ID)
-    static RealisticWeight instance;
-    private static Logger logger;
-
-    public static void logInfo(String message) {
-        logger.info("RealisticWeight : " + message);
-    }
+    public static RealisticWeight instance;
+    public Logger logger;
 
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
-        logInfo("Pre-Initialization Complete");
+        logger.info("Pre-Initialization Complete");
     }
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         proxy.init(event);
         Mapper.init();
-        logInfo("Initialization Complete");
+        logger.info("Initialization Complete");
     }
 
     @Mod.EventHandler
     public void onPostInit(FMLPostInitializationEvent event) {
-        logInfo("Post-Initialization Complete");
+        logger.info("Post-Initialization Complete");
     }
 }

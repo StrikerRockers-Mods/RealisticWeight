@@ -1,5 +1,10 @@
 package io.github.strikerrocker.realw.proxies;
 
-public class ClientProxy extends CommonProxy{
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
+public class ClientProxy extends CommonProxy{
+    @Override
+    public void init(FMLInitializationEvent event) {
+        super.init(event);
+    }
 }
