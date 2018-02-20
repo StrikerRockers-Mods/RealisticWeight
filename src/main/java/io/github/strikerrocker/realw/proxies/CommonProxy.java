@@ -5,6 +5,7 @@ import io.github.strikerrocker.realw.capability.Weight;
 import io.github.strikerrocker.realw.capability.storage.WeightStorage;
 import io.github.strikerrocker.realw.events.CapabilityEvents;
 import io.github.strikerrocker.realw.events.PlayerEvents;
+import io.github.strikerrocker.realw.events.TooltipEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -14,5 +15,6 @@ public class CommonProxy {
         CapabilityManager.INSTANCE.register(IWeight.class, new WeightStorage(), Weight.class);
         MinecraftForge.EVENT_BUS.register(new CapabilityEvents());
         MinecraftForge.EVENT_BUS.register(new PlayerEvents());
+        MinecraftForge.EVENT_BUS.register(new TooltipEvent());
     }
 }
