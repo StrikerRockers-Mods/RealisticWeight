@@ -3,10 +3,9 @@ package io.github.strikerrocker.realw;
 import io.github.strikerrocker.realw.proxies.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
 import static io.github.strikerrocker.realw.Constants.*;
@@ -32,6 +31,8 @@ public class RealisticWeight {
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
+        proxy.init(event);
+        Mapper.init();
         logInfo("Initialization Complete");
     }
 
