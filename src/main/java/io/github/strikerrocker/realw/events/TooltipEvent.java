@@ -11,11 +11,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class TooltipEvent {
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event) {
-        if (event.getItemStack().getItem() instanceof ItemArrow) {
+        if (event.getItemStack().hasCapability(WeightProvider.WEIGHT_CAP, null) && event.getItemStack().getItem() instanceof ItemArrow) {
             ItemStack stack = event.getItemStack();
             IWeight weight = stack.getCapability(WeightProvider.WEIGHT_CAP, null);
             int we = weight.getStackWeight(stack);
-            event.getToolTip().add(TextFormatting.YELLOW + "Weight" + "  " + we);
+            event.getToolTip().add(TextFormatting.YELLOW + "Weight" + " : " + TextFormatting.WHITE + we);
         }
     }
 }
