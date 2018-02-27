@@ -13,6 +13,7 @@ import net.minecraft.util.NonNullList;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("all")
 public class InventoryListener implements IContainerListener {
 
     private final EntityPlayerMP owner;
@@ -29,7 +30,6 @@ public class InventoryListener implements IContainerListener {
     @Override
     public void sendSlotContents(Container containerToSend, int slotInd, ItemStack stack) {
         updateWeight(owner);
-
     }
 
     @Override

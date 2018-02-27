@@ -23,6 +23,8 @@ public class ItemWeight {
     /**
      * Set's the weight for the given item
      *
+     * Don't use this during runtime may cause issue's
+     *
      * @param item  The item
      * @param value The weight
      */
