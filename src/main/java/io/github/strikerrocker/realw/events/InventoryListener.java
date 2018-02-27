@@ -49,7 +49,8 @@ public class InventoryListener implements IContainerListener {
         for (ItemStack stack : inventory) {
             IWeight WEIGHT = stack.getCapability(WeightProvider.WEIGHT_CAP, null);
             int i = WEIGHT.getStackWeight(stack);
-            WEIGHT.setWeight(i);
+            IWeight pWeight = player.getCapability(WeightProvider.WEIGHT_CAP, null);
+            pWeight.addWeight(i);
         }
     }
 }

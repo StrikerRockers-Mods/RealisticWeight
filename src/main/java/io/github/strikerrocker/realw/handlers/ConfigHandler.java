@@ -38,7 +38,7 @@ public class ConfigHandler {
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(Constants.MOD_ID))
-            ConfigHandler.syncConfig();
+            syncConfig();
     }
 
     private static void syncConfig() {
@@ -46,13 +46,9 @@ public class ConfigHandler {
         gamemode = get(GeneralCategory, "GameMode", true, "Set's the game-mode of the mod. True = normal mode ,False = HardCoreMode");
         doMapping = get(GeneralCategory, "mapping", true, "Set this to false if u want to only run the mapping once. Reduces the loading time");
         weight = get(GeneralCategory, "Max Player Weight", 10000, "Maximum weight a player can handle before he/she get's de-buff", true).setMinValue(100).setMaxValue(Integer.MAX_VALUE).getInt();
-    }
 
-    private static Property get(String category, String key, double defaultValue, String comment, boolean slider) {
-        Property property = config.get(category, key, defaultValue, comment);
-        if (slider && FMLCommonHandler.instance().getEffectiveSide().isClient())
-            return property.setConfigEntryClass(GuiConfigEntries.NumberSliderEntry.class);
-        return property;
+        if (config.hasChanged())
+            config.save();
     }
 
     private static Property get(String category, String key, int defaultValue, String comment, boolean slider) {
