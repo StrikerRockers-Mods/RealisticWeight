@@ -1,6 +1,7 @@
 package io.github.strikerrocker.realw.events;
 
 import io.github.strikerrocker.realw.api.IWeight;
+import io.github.strikerrocker.realw.api.ItemWeight;
 import io.github.strikerrocker.realw.capability.WeightProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,7 +14,6 @@ import net.minecraft.util.NonNullList;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("all")
 public class InventoryListener implements IContainerListener {
 
     private final EntityPlayerMP owner;
@@ -42,15 +42,16 @@ public class InventoryListener implements IContainerListener {
 
     }
 
-    public void updateWeight(EntityPlayer player) {
-        List<ItemStack> inventory = new ArrayList<>(player.inventory.mainInventory);
-        inventory.addAll(player.inventory.offHandInventory);
-        inventory.addAll(player.inventory.armorInventory);
-        for (ItemStack stack : inventory) {
-            IWeight WEIGHT = stack.getCapability(WeightProvider.WEIGHT_CAP, null);
-            int i = WEIGHT.getStackWeight(stack);
+    private void updateWeight(EntityPlayer player) {
+        if (player != null) {
             IWeight pWeight = player.getCapability(WeightProvider.WEIGHT_CAP, null);
-            pWeight.addWeight(i);
+            List<ItemStack> inventory = new ArrayList<>(player.inventory.mainInventory);
+            inventory.addAll(player.inventory.offHandInventory);
+            inventory.addAll(player.inventory.armorInventory);
+            for (ItemStack stack : inventory) {
+                int i = ItemWeight.getStackWeight(stack);
+                pWeight.addWeight(i);
+            }
         }
     }
 }
