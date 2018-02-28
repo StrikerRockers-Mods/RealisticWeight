@@ -9,6 +9,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import java.io.File;
+
 import static io.github.strikerrocker.realw.Constants.*;
 
 @Mod(modid = MOD_ID, name = NAME, version = VERSION)
@@ -19,10 +21,15 @@ public class RealisticWeight {
 
     @Mod.Instance(MOD_ID)
     public static RealisticWeight instance;
+    public static File CONFIG_DIR;
+    public static File PREGENERATED_WEIGHT_FILE;
 
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
-        ConfigHandler.init(event.getSuggestedConfigurationFile());
+        CONFIG_DIR = new File(event.getModConfigurationDirectory(), NAME);
+        if (!CONFIG_DIR.exists()) CONFIG_DIR.mkdirs();
+        PREGENERATED_WEIGHT_FILE = new File(CONFIG_DIR, "Weight.json");
+        ConfigHandler.init(new File(CONFIG_DIR, "Realistic Weight.cfg"));
     }
 
     @Mod.EventHandler

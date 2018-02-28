@@ -109,6 +109,6 @@ public class MaterialMapper {
         if (material == Material.WOOD) {
             ItemWeight.setWeight(item, 200);
         }
-
     }
 }
+
