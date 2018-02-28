@@ -23,6 +23,7 @@ public class PlayerEvents {
             IWeight weight = entity.getCapability(WeightProvider.WEIGHT_CAP, null);
             if (weight.getWeight() > ConfigHandler.weight) {
                 if (ConfigHandler.gamemode) {
+
                 } else {
                     entity.setDead();
                 }

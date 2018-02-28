@@ -52,13 +52,11 @@ public class JSONUtils {
     public static <T> T fromJson(@Nonnull TypeToken<T> token, @Nonnull File file) {
         if (!file.exists())
             return null;
-
         try (FileReader reader = new FileReader(file)) {
             return GSON.fromJson(reader, token.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

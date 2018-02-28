@@ -1,9 +1,6 @@
 package io.github.strikerrocker.realw.capability;
 
 import io.github.strikerrocker.realw.api.IWeight;
-import io.github.strikerrocker.realw.api.ItemWeight;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class Weight implements IWeight {
     /**
@@ -49,18 +46,5 @@ public class Weight implements IWeight {
     @Override
     public int getWeight() {
         return Weight;
-    }
-
-    /**
-     * Return's the stack weight for the given stack
-     *
-     * @param stack the stack
-     * @return weight
-     */
-    @Override
-    public int getStackWeight(ItemStack stack) {
-        int count = stack.getCount();
-        Item item = stack.getItem();
-        return count * ItemWeight.getWeight(item);
     }
 }

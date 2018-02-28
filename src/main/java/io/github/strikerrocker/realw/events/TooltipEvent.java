@@ -1,6 +1,5 @@
 package io.github.strikerrocker.realw.events;
 
-import io.github.strikerrocker.realw.api.IWeight;
 import io.github.strikerrocker.realw.api.ItemWeight;
 import io.github.strikerrocker.realw.capability.WeightProvider;
 import net.minecraft.item.ItemBlock;
@@ -14,8 +13,7 @@ public class TooltipEvent {
     public void tooltip(ItemTooltipEvent event) {
         if (event.getItemStack().hasCapability(WeightProvider.WEIGHT_CAP, null)) {
             ItemStack stack = event.getItemStack();
-            IWeight weight = stack.getCapability(WeightProvider.WEIGHT_CAP, null);
-            int stackWeight = weight.getStackWeight(stack);
+            int stackWeight = ItemWeight.getStackWeight(stack);
             int itemWeight = ItemWeight.getWeight(stack.getItem());
             if (stack.getItem() instanceof ItemBlock) {
                 event.getToolTip().add(TextFormatting.YELLOW + "Block Weight" + " : " + TextFormatting.WHITE + itemWeight);

@@ -1,7 +1,5 @@
 package io.github.strikerrocker.realw.api;
 
-import net.minecraft.item.ItemStack;
-
 public interface IWeight {
     /**
      * Set's the weight for the player
@@ -27,11 +25,4 @@ public interface IWeight {
      * @return weight
      */
     int getWeight();
-
-    /**
-     *Return's the stack weight for the given stack
-     * @param stack the stack
-     * @return weight
-     */
-    int getStackWeight(ItemStack stack);
 }
