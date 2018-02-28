@@ -33,7 +33,14 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment   this to disable.
 }
 
+repositories {
+    maven { url 'https://maven.mcmoddev.com' }
+    maven { url "http://maven.blamejared.com" }
+}
+
 dependencies {
+    provided "net.darkhax.gamestages:GameStages-${minecraftversion}:${gamestagesversion}"
+    provided "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.4.427"
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
