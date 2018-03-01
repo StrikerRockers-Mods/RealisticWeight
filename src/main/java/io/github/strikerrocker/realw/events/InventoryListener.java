@@ -46,12 +46,15 @@ public class InventoryListener implements IContainerListener {
         if (player != null) {
             IWeight pWeight = player.getCapability(WeightProvider.WEIGHT_CAP, null);
             List<ItemStack> inventory = new ArrayList<>(player.inventory.mainInventory);
+            pWeight.setWeight(1);
             inventory.addAll(player.inventory.offHandInventory);
             inventory.addAll(player.inventory.armorInventory);
+            int a = 1;
             for (ItemStack stack : inventory) {
                 int i = ItemWeight.getStackWeight(stack);
-                pWeight.addWeight(i);
+                a = a + i;
             }
+            pWeight.setWeight(a);
         }
     }
 }

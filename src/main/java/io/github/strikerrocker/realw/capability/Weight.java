@@ -6,7 +6,7 @@ public class Weight implements IWeight {
     /**
      * Store's the player weight
      */
-    private int Weight;
+    private int Weight = 1;
 
     /**
      * Set's the weight for the player
