@@ -14,7 +14,7 @@ public class ItemWeight
     /**
      * Stores the weight for all item's
      */
-    private static Map<Item, Map<Pair<Integer, NBTTagCompound>, Integer>> weight = new HashMap<>();
+    private static Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> weight = new HashMap<>();
 
     /**
      * Returns the weight for the given item's
@@ -56,8 +56,8 @@ public class ItemWeight
      * @return The weight of the item
      */
     public static int getWeight(Item item, int meta, NBTTagCompound nbt) {
-        if (weight.get(item).get(new Pair<>(meta, nbt)) != null) {
-            return weight.get(item).get(new Pair<>(meta, nbt));
+        if (weight.get(getName(item)).get(new Pair<>(meta, nbt)) != null) {
+            return weight.get(getName(item)).get(new Pair<>(meta, nbt));
         }
         return 0;
     }
@@ -120,14 +120,15 @@ public class ItemWeight
      * @param nbt   The NBT data
      */
     public static void setWeight(Item item, int value, int meta, NBTTagCompound nbt) {
-        if (weight.get(item) != null) {
-            weight.get(item).put(new Pair<>(meta, nbt), value);
+        String name = getName(item);
+        if (weight.get(name) != null) {
+            weight.get(name).put(new Pair<>(meta, nbt), value);
             return;
         }
 
         Map<Pair<Integer, NBTTagCompound>, Integer> map = new HashMap<>();
         map.put(new Pair<>(meta, nbt), value);
-        weight.put(item, map);
+        weight.put(name, map);
     }
 
     /**
@@ -135,7 +136,11 @@ public class ItemWeight
      *
      * @return
      */
-    public static Map<Item, Map<Pair<Integer, NBTTagCompound>, Integer>> getMap() {
+    public static Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> getMap() {
         return weight;
+    }
+
+    public static String getName(Item item) {
+        return item.getRegistryName().getResourceDomain() + ":" + item.getRegistryName().getResourcePath();
     }
 }

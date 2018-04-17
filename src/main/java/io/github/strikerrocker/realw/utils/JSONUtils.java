@@ -12,10 +12,7 @@ import javafx.util.Pair;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -68,12 +65,12 @@ public class JSONUtils
         writer.close();
     }
 
-    public static Map<Item, Map<Pair<Integer, NBTTagCompound>, Integer>> readFromJson() {
+    public static Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> readFromJson(File file) throws FileNotFoundException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Type map = new TypeToken<Map<Item, Map<Pair<Integer, NBTTagCompound>, Integer>>>()
+        Type map = new TypeToken<Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>>>()
         {
         }.getType();
-        Map<Item, Map<Pair<Integer, NBTTagCompound>, Integer>> newMap = gson.fromJson(, map);
+        Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> newMap = gson.fromJson(new FileReader(file), map);
         return newMap;
     }
 }
