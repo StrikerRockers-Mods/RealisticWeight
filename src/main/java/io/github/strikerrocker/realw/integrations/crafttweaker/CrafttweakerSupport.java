@@ -8,8 +8,9 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @SuppressWarnings("unused")
-@ZenClass("mods.RealisticWeight")
-public class CrafttweakerSupport {
+@ZenClass("mods.realisticweight")
+public class CrafttweakerSupport
+{
     @ZenMethod
     public static void setWeight(IIngredient item, int weight) {
         for (IItemStack stack : item.getItems()) {

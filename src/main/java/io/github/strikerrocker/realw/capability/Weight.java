@@ -2,7 +2,8 @@ package io.github.strikerrocker.realw.capability;
 
 import io.github.strikerrocker.realw.api.IWeight;
 
-public class Weight implements IWeight {
+public class Weight implements IWeight
+{
     /**
      * Store's the player weight
      */

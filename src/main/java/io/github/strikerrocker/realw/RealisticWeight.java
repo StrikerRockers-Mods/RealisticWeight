@@ -4,6 +4,7 @@ import crafttweaker.CraftTweakerAPI;
 import io.github.strikerrocker.realw.integrations.crafttweaker.CrafttweakerSupport;
 import io.github.strikerrocker.realw.mapping.Mapper;
 import io.github.strikerrocker.realw.proxies.CommonProxy;
+import io.github.strikerrocker.realw.utils.JSONUtils;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -21,7 +22,8 @@ import static io.github.strikerrocker.realw.Constants.*;
 
 @Mod(modid = MOD_ID, name = NAME, version = VERSION)
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class RealisticWeight {
+public class RealisticWeight
+{
 
     @SidedProxy(serverSide = PACKAGE_LOCATION + ".proxies.CommonProxy", clientSide = PACKAGE_LOCATION + ".proxies.ClientProxy", modId = MOD_ID)
     public static CommonProxy proxy;
@@ -40,10 +42,12 @@ public class RealisticWeight {
     public void onInit(FMLInitializationEvent event) {
         proxy.init(event);
         Mapper.init();
+
     }
 
     @Mod.EventHandler
     public void onPostInit(FMLPostInitializationEvent event) {
+        JSONUtils.writeDefaults(PRE_GENERATED_WEIGHT_FILE);
     }
 
     @SubscribeEvent

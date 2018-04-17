@@ -6,7 +6,8 @@ import static io.github.strikerrocker.realw.Constants.MOD_ID;
 import static io.github.strikerrocker.realw.Constants.NAME;
 
 @Config(modid = MOD_ID, name = NAME + "/" + NAME)
-public class ConfigHandler {
+public class ConfigHandler
+{
     @Config.Comment("Set's the game-mode of the mod. True = normal mode ,False = HardCoreMode")
     @Config.Name("GameMode")
     public static boolean gamemode = true;

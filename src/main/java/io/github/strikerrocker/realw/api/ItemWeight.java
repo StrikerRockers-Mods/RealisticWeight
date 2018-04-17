@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings({"unused"})
-public class ItemWeight {
+public class ItemWeight
+{
     /**
      * Stores the weight for all item's
      */
@@ -28,7 +29,7 @@ public class ItemWeight {
     /**
      * Returns the weight for the given item's
      *
-     * @param item The item to return weight for
+     * @param item The item to returstack   n weight for
      * @param meta The meta of the item to return weight for
      * @return The weight of the item
      */
@@ -127,5 +128,14 @@ public class ItemWeight {
         Map<Pair<Integer, NBTTagCompound>, Integer> map = new HashMap<>();
         map.put(new Pair<>(meta, nbt), value);
         weight.put(item, map);
+    }
+
+    /**
+     * Return's the weight map
+     *
+     * @return
+     */
+    public static Map<Item, Map<Pair<Integer, NBTTagCompound>, Integer>> getMap() {
+        return weight;
     }
 }
