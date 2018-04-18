@@ -1,20 +1,18 @@
 package io.github.strikerrocker.realw.api;
 
-import javafx.util.Pair;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings({"unused"})
-public class ItemWeight
-{
+public class ItemWeight {
     /**
      * Stores the weight for all item's
      */
-    private static Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> weight = new HashMap<>();
+    private static Map<String, Integer> weights = new HashMap<>();
 
     /**
      * Returns the weight for the given item's
@@ -23,18 +21,19 @@ public class ItemWeight
      * @return The weight of the item
      */
     public static int getWeight(Item item) {
-        return getWeight(item, 0, null);
+        return getWeight(item, 0);
     }
 
     /**
      * Returns the weight for the given item's
      *
-     * @param item The item to returstack   n weight for
+     * @param item The item to return weight for
      * @param meta The meta of the item to return weight for
      * @return The weight of the item
      */
     public static int getWeight(Item item, int meta) {
-        return getWeight(item, meta, null);
+        Integer itemWeight = weights.get(item.getRegistryName().toString() + ":" + meta);
+        return itemWeight == null ? 0 : itemWeight;
     }
 
     /**
@@ -44,32 +43,34 @@ public class ItemWeight
      * @return The weight of the item
      */
     public static int getWeight(ItemStack itemStack) {
-        return getWeight(itemStack.getItem(), itemStack.getMetadata(), itemStack.getTagCompound());
-    }
-
-    /**
-     * Returns the weight of the item in the itemstack
-     *
-     * @param item The item to return weight for
-     * @param meta The meta of the item to return weight for
-     * @param nbt  The NBT of the item to return weight for
-     * @return The weight of the item
-     */
-    public static int getWeight(Item item, int meta, NBTTagCompound nbt) {
-        if (weight.get(getName(item)).get(new Pair<>(meta, nbt)) != null) {
-            return weight.get(getName(item)).get(new Pair<>(meta, nbt));
-        }
-        return 0;
+        return getWeight(itemStack.getItem(), itemStack.getMetadata());
     }
 
     /**
      * Return's the stack weight for the given stack
      *
      * @param stack The stack to return weight for
-     * @return weight The weight of the stack
+     * @return The weight of the stack
      */
     public static int getStackWeight(ItemStack stack) {
         return getWeight(stack) * stack.getCount();
+    }
+
+    /**
+     * Return's the inventory weight for the given inventory
+     *
+     * @param inventory The inventory to return weight for
+     * @return The weight of the inventory
+     */
+    public static int getInventoryWeight(IInventory inventory){
+        int weight = 0;
+        for(int i = 0; i < inventory.getSizeInventory(); i++){
+            ItemStack stack = inventory.getStackInSlot(i);
+            if(!(stack==ItemStack.EMPTY) && !(stack.isEmpty())){
+                weight += getStackWeight(stack);
+            }
+        }
+        return weight;
     }
 
     /**
@@ -77,11 +78,11 @@ public class ItemWeight
      * <p>
      * Don't use this during runtime may cause issue's
      *
-     * @param item  The item to store weight for
-     * @param value The weight to store
+     * @param item  The item to set weight for
+     * @param value The weight to set
      */
     public static void setWeight(Item item, int value) {
-        setWeight(item, value, 0, null);
+        setWeight(item, 0, value);
     }
 
     /**
@@ -93,7 +94,7 @@ public class ItemWeight
      * @param value     The weight
      */
     public static void setWeight(ItemStack itemStack, int value) {
-        setWeight(itemStack.getItem(), value, itemStack.getMetadata(), itemStack.getTagCompound());
+        setWeight(itemStack.getItem(), itemStack.getMetadata(), value);
     }
 
     /**
@@ -103,32 +104,10 @@ public class ItemWeight
      *
      * @param item  The item to set weight for
      * @param value The weight to set for the item
-     * @param meta  The Metadata of the item to store weight for
+     * @param meta  The Metadata of the item to set weight for
      */
-    public static void setWeight(Item item, int value, int meta) {
-        setWeight(item, value, meta, null);
-    }
-
-    /**
-     * Set's the weight for the given item
-     * <p>
-     * Don't use this during runtime may cause issue's
-     *
-     * @param item  The item
-     * @param value The weight
-     * @param meta  The Metadata
-     * @param nbt   The NBT data
-     */
-    public static void setWeight(Item item, int value, int meta, NBTTagCompound nbt) {
-        String name = getName(item);
-        if (weight.get(name) != null) {
-            weight.get(name).put(new Pair<>(meta, nbt), value);
-            return;
-        }
-
-        Map<Pair<Integer, NBTTagCompound>, Integer> map = new HashMap<>();
-        map.put(new Pair<>(meta, nbt), value);
-        weight.put(name, map);
+    public static void setWeight(Item item, int meta, int value) {
+        weights.put(item.getRegistryName().toString()+":"+meta, value);
     }
 
     /**
@@ -136,11 +115,7 @@ public class ItemWeight
      *
      * @return
      */
-    public static Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> getMap() {
-        return weight;
-    }
-
-    public static String getName(Item item) {
-        return item.getRegistryName().getResourceDomain() + ":" + item.getRegistryName().getResourcePath();
+    public static Map<String, Integer> getMap() {
+        return new HashMap<>(weights);
     }
 }
