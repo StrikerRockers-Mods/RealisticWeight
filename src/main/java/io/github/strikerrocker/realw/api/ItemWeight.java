@@ -1,6 +1,8 @@
 package io.github.strikerrocker.realw.api;
 
 import javafx.util.Pair;
+import jline.internal.Nullable;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,12 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings({"unused"})
-public class ItemWeight
-{
+public class ItemWeight {
     /**
      * Stores the weight for all item's
      */
-    private static Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> weight = new HashMap<>();
+    private static Map<Item, Map<Pair<Integer, NBTTagCompound>, Integer>> weight = new HashMap<>();
 
     /**
      * Returns the weight for the given item's
@@ -29,7 +30,7 @@ public class ItemWeight
     /**
      * Returns the weight for the given item's
      *
-     * @param item The item to returstack   n weight for
+     * @param item The item to return weight for
      * @param meta The meta of the item to return weight for
      * @return The weight of the item
      */
@@ -56,10 +57,10 @@ public class ItemWeight
      * @return The weight of the item
      */
     public static int getWeight(Item item, int meta, NBTTagCompound nbt) {
-        if (weight.get(getName(item)).get(new Pair<>(meta, nbt)) != null) {
-            return weight.get(getName(item)).get(new Pair<>(meta, nbt));
-        }
-        return 0;
+//        if (weight.get(item).get(new Pair<>(meta, nbt)) != null) {
+//            return weight.get(item).get(new Pair<>(meta, nbt));
+//        }
+//        return 0;
     }
 
     /**
@@ -124,8 +125,65 @@ public class ItemWeight
         if (weight.get(name) != null) {
             weight.get(name).put(new Pair<>(meta, nbt), value);
             return;
+        if(item!=null){
+            weight.put(new ItemThing(item, meta, nbt), value);
+        }
+    }
+
+    private static class ItemThing{
+
+        Item item;
+        int meta;
+        NBTTagCompound nbt;
+
+
+
+        ItemThing(Item item, int meta, @Nullable NBTTagCompound nbt){
+            this.item = item;
+            this.meta = meta;
+            this.nbt = nbt;
         }
 
+        private static final ItemThing cache = new ItemThing();
+
+        private ItemThing(){
+
+        }
+
+        private void setStack(ItemStack is) {
+            item = is.getItem();
+            meta = is.getMetadata();
+            nbt = is.getTagCompound();
+        }
+
+        public static synchronized <T> T getFromMap(Map<ItemThing, T> map, ItemStack is) {
+            cache.setStack(is);
+            return map.get(cache);
+        }
+
+        @Override
+        public boolean equals(Object obj){
+            if(obj==null || !(obj instanceof ItemThing)){
+                return false;
+            }
+
+            for(String key : ((ItemThing)obj).nbt.getKeySet()){
+                if(nbt.getTag(key)!=((ItemThing)obj).nbt) return false;
+            }
+
+            return (this.item==((ItemThing) obj).item) && (this.meta==((ItemThing) obj).meta);
+        }
+
+        @Override
+        public int hashCode() {
+            if (item == Items.AIR || item == null) { return 0; }
+            final int prime = 1289;
+            int result = 1;
+            result = prime * result + item.getUnlocalizedName().hashCode();
+            result = prime * result + (nbt == null ? 0 : nbt.hashCode());
+            result = prime * result + meta;
+            return result;
+        }
         Map<Pair<Integer, NBTTagCompound>, Integer> map = new HashMap<>();
         map.put(new Pair<>(meta, nbt), value);
         weight.put(name, map);
