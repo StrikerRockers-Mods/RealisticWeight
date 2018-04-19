@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.github.strikerrocker.realw.api.ItemWeight;
-import javafx.util.Pair;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,12 +24,12 @@ public class JSONUtils
         }
     }
 
-    public static Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> readFromJson(File file) throws FileNotFoundException {
+    public static Map<String, Integer> readFromJson(File file) throws FileNotFoundException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Type map = new TypeToken<Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>>>()
+        Type map = new TypeToken<Map<String, Integer>>()
         {
         }.getType();
-        Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> newMap = gson.fromJson(new FileReader(file), map);
+        Map<String, Integer> newMap = gson.fromJson(new FileReader(file), map);
         return newMap;
     }
 }

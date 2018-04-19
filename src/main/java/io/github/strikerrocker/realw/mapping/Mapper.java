@@ -3,10 +3,8 @@ package io.github.strikerrocker.realw.mapping;
 import io.github.strikerrocker.realw.api.ItemWeight;
 import io.github.strikerrocker.realw.handlers.ConfigHandler;
 import io.github.strikerrocker.realw.utils.JSONUtils;
-import javafx.util.Pair;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAir;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,8 +24,13 @@ public class Mapper
                 }
             } else {
                 try {
-                    Map<String, Map<Pair<Integer, NBTTagCompound>, Integer>> newMap = JSONUtils.readFromJson(file);
-                    newMap.get(item).get(new Pair<>(0, null));
+                    for (int meta = 0; meta <= 15; meta++) {
+                        Map<String, Integer> newMap = JSONUtils.readFromJson(file);
+                        Integer itemWeight = newMap.get(item.getRegistryName().toString() + ":" + meta);
+                        if (itemWeight != 0) {
+                            ItemWeight.setWeight(item, meta, itemWeight);
+                        }
+                    }
                 } catch (FileNotFoundException e) {
                     System.out.print(e);
                 }

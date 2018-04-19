@@ -55,7 +55,8 @@ public class InventoryListener implements IContainerListener
                 int i = ItemWeight.getStackWeight(stack);
                 a = a + i;
             }
-            pWeight.setWeight(a);
+            pWeight.setWeight(a + pWeight.getApiWeight());
+            pWeight.setApiWeight(0);
         }
     }
 }

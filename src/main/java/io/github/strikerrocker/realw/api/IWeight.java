@@ -29,4 +29,22 @@ public interface IWeight
      * @return weight
      */
     int getWeight();
+    //Internal start(Dont use this)
+
+    /**
+     * Return's the weight currently set by the API
+     * Dont mess with this use getWeight.
+     *
+     * @return apiWeight
+     */
+    int getApiWeight();
+
+    /**
+     * Sets the weight for the api
+     * Dont mess with this use addWeight,setWeight,reduceWeight.
+     *
+     * @param weight
+     */
+
+    void setApiWeight(int weight);
 }
