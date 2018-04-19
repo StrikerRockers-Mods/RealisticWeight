@@ -38,7 +38,7 @@ public class ItemWeight
     }
 
     /**
-     * Returns the weight of the item in the itemstack
+     * Returns the weight of the item in the Itemstack
      *
      * @param itemStack The item to return weight for
      * @return The weight of the item

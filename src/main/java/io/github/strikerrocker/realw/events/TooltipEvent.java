@@ -1,7 +1,7 @@
 package io.github.strikerrocker.realw.events;
 
 import io.github.strikerrocker.realw.api.ItemWeight;
-import io.github.strikerrocker.realw.capability.WeightProvider;
+import io.github.strikerrocker.realw.api.player_weight.WeightProvider;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;

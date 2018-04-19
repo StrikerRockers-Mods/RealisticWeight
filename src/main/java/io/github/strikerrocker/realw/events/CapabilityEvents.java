@@ -1,7 +1,7 @@
 package io.github.strikerrocker.realw.events;
 
 import io.github.strikerrocker.realw.Constants;
-import io.github.strikerrocker.realw.capability.WeightProvider;
+import io.github.strikerrocker.realw.api.player_weight.WeightProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,12 +15,12 @@ public class CapabilityEvents
     private static final ResourceLocation WEIGHT_CAP = new ResourceLocation(Constants.MOD_ID, "weight");
 
     @SubscribeEvent
-    public void attachCap(AttachCapabilitiesEvent<ItemStack> event) {
+    public void attachCapabilityStack(AttachCapabilitiesEvent<ItemStack> event) {
         event.addCapability(WEIGHT_CAP, new WeightProvider());
     }
 
     @SubscribeEvent
-    public void attachCapa(AttachCapabilitiesEvent<Entity> event) {
+    public void attachCapabilityEntity(AttachCapabilitiesEvent<Entity> event) {
         if (!(event.getObject() instanceof EntityPlayer)) return;
         event.addCapability(WEIGHT_CAP, new WeightProvider());
     }

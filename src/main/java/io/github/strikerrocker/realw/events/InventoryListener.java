@@ -1,8 +1,8 @@
 package io.github.strikerrocker.realw.events;
 
-import io.github.strikerrocker.realw.api.IWeight;
 import io.github.strikerrocker.realw.api.ItemWeight;
-import io.github.strikerrocker.realw.capability.WeightProvider;
+import io.github.strikerrocker.realw.api.player_weight.IWeight;
+import io.github.strikerrocker.realw.api.player_weight.WeightProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -50,12 +50,17 @@ public class InventoryListener implements IContainerListener
             inventory.addAll(player.inventory.armorInventory);
             int a = 1;
             for (ItemStack stack : inventory) {
-                int i = ItemWeight.getStackWeight(stack);
-                a = a + i;
+                if (!(stack.getItem().isDamageable())) {
+                    int i = ItemWeight.getStackWeight(stack);
+                    a = a + i;
+                } else {
+                    int damage = (stack.getMaxDamage() - stack.getItemDamage()) / stack.getMaxDamage();
+                    int w = ItemWeight.getWeight(stack.getItem());
+                    a = a + w + damage;
+                }
             }
-            int added = (pWeight.getWeight() - a) + pWeight.getApiWeight();
+            int added = ((pWeight.getWeight() - pWeight.getApiWeight()) - a);
             pWeight.addWeight(added);
-            pWeight.setApiWeight(0);
         }
     }
 }

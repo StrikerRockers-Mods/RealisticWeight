@@ -1,7 +1,7 @@
 package io.github.strikerrocker.realw.events;
 
-import io.github.strikerrocker.realw.api.IWeight;
-import io.github.strikerrocker.realw.capability.WeightProvider;
+import io.github.strikerrocker.realw.api.player_weight.IWeight;
+import io.github.strikerrocker.realw.api.player_weight.WeightProvider;
 import io.github.strikerrocker.realw.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -23,7 +23,7 @@ public class PlayerEvents
         if (event.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer entity = (EntityPlayer) event.getEntity();
             IWeight pweight = entity.getCapability(WeightProvider.WEIGHT_CAP, null);
-            float percent = pweight.getWeight() / ConfigHandler.weight * 100 / 100;
+            float percent = pweight.getWeight() / ConfigHandler.weight;
             if (ConfigHandler.gamemode) {
                 if (percent <= 0.125) {
                     entity.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 200, 1, false, false));

@@ -1,6 +1,6 @@
 package io.github.strikerrocker.realw.proxies;
 
-import io.github.strikerrocker.realw.api.IWeight;
+import io.github.strikerrocker.realw.api.player_weight.IWeight;
 import io.github.strikerrocker.realw.capability.Weight;
 import io.github.strikerrocker.realw.capability.storage.WeightStorage;
 import io.github.strikerrocker.realw.events.CapabilityEvents;

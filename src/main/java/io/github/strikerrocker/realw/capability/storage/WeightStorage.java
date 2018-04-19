@@ -1,6 +1,6 @@
 package io.github.strikerrocker.realw.capability.storage;
 
-import io.github.strikerrocker.realw.api.IWeight;
+import io.github.strikerrocker.realw.api.player_weight.IWeight;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTPrimitive;
 import net.minecraft.nbt.NBTTagInt;

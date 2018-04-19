@@ -1,6 +1,6 @@
 package io.github.strikerrocker.realw.capability;
 
-import io.github.strikerrocker.realw.api.IWeight;
+import io.github.strikerrocker.realw.api.player_weight.IWeight;
 
 public class Weight implements IWeight
 {
@@ -17,7 +17,7 @@ public class Weight implements IWeight
      */
     @Override
     public void addWeight(int weight) {
-        this.Weight += api_weight;
+        api_weight += weight;
     }
 
     /**
@@ -27,11 +27,12 @@ public class Weight implements IWeight
      */
     @Override
     public void reduceWeight(int weight) {
-        this.Weight -= api_weight;
+        api_weight -= weight;
     }
 
     /**
      * Return's the current weight of the player
+     * 1
      *
      * @return weight
      */
@@ -47,17 +48,12 @@ public class Weight implements IWeight
      */
     @Override
     public void setWeight(int weight) {
-        this.Weight = weight;
-        api_weight = 0;
+        reduceWeight(this.Weight);
+        addWeight(weight);
     }
 
     @Override
     public int getApiWeight() {
         return api_weight;
-    }
-
-    @Override
-    public void setApiWeight(int weight) {
-        this.api_weight = weight;
     }
 }

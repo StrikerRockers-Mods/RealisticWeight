@@ -11,13 +11,15 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class JSONUtils
 {
     public static void writeDefaults(File file) {
         try (PrintWriter writer = new PrintWriter(file)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String json = gson.toJson(ItemWeight.getMap());
+            Map<String, Integer> map = new TreeMap<>(ItemWeight.getMap());
+            String json = gson.toJson(map);
             writer.print(json);
         } catch (Exception e) {
             System.out.print(e);
@@ -29,7 +31,6 @@ public class JSONUtils
         Type map = new TypeToken<Map<String, Integer>>()
         {
         }.getType();
-        Map<String, Integer> newMap = gson.fromJson(new FileReader(file), map);
-        return newMap;
+        return gson.fromJson(new FileReader(file), map);
     }
 }
