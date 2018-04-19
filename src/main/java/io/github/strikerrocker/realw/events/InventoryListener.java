@@ -35,12 +35,10 @@ public class InventoryListener implements IContainerListener
 
     @Override
     public void sendWindowProperty(Container containerIn, int varToUpdate, int newValue) {
-
     }
 
     @Override
     public void sendAllWindowProperties(Container containerIn, IInventory inventory) {
-
     }
 
     private void updateWeight(EntityPlayer player) {
@@ -55,7 +53,8 @@ public class InventoryListener implements IContainerListener
                 int i = ItemWeight.getStackWeight(stack);
                 a = a + i;
             }
-            pWeight.setWeight(a + pWeight.getApiWeight());
+            int added = (pWeight.getWeight() - a) + pWeight.getApiWeight();
+            pWeight.addWeight(added);
             pWeight.setApiWeight(0);
         }
     }

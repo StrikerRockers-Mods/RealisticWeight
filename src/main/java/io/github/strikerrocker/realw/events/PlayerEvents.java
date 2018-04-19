@@ -22,19 +22,19 @@ public class PlayerEvents
     public void livingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer entity = (EntityPlayer) event.getEntity();
-            IWeight weight = entity.getCapability(WeightProvider.WEIGHT_CAP, null);
-            float percent = weight.getWeight() / ConfigHandler.weight * 100 / 100;
+            IWeight pweight = entity.getCapability(WeightProvider.WEIGHT_CAP, null);
+            float percent = pweight.getWeight() / ConfigHandler.weight * 100 / 100;
             if (ConfigHandler.gamemode) {
-                if (percent <= 12.5) {
+                if (percent <= 0.125) {
                     entity.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 200, 1, false, false));
                     entity.addPotionEffect(new PotionEffect(MobEffects.SPEED, 200, 1, false, false));
-                } else if (percent > 0.125 && percent <= 0.25) {
+                } else if (percent <= 0.25) {
                     entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1, false, false));
-                } else if (percent > 0.25 && percent <= 0.5) {
+                } else if (percent <= 0.5) {
                     entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 2, false, false));
-                } else if (percent > 0.5 && percent <= 0.75) {
+                } else if (percent <= 0.75) {
                     entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 3, false, false));
-                } else if (percent > 0.75) {
+                } else {
                     entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 4, false, false));
                 }
             } else {

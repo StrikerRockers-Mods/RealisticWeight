@@ -42,7 +42,6 @@ public class RealisticWeight
     public void onInit(FMLInitializationEvent event) {
         proxy.init(event);
         Mapper.init(PRE_GENERATED_WEIGHT_FILE);
-
     }
 
     @Mod.EventHandler

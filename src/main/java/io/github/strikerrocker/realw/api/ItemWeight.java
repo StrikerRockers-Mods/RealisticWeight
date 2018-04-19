@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings({"unused"})
-public class ItemWeight {
+public class ItemWeight
+{
     /**
      * Stores the weight for all item's
      */
@@ -62,11 +63,11 @@ public class ItemWeight {
      * @param inventory The inventory to return weight for
      * @return The weight of the inventory
      */
-    public static int getInventoryWeight(IInventory inventory){
+    public static int getInventoryWeight(IInventory inventory) {
         int weight = 0;
-        for(int i = 0; i < inventory.getSizeInventory(); i++){
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
-            if(!(stack==ItemStack.EMPTY) && !(stack.isEmpty())){
+            if (!(stack == ItemStack.EMPTY) && !(stack.isEmpty())) {
                 weight += getStackWeight(stack);
             }
         }
@@ -107,7 +108,7 @@ public class ItemWeight {
      * @param meta  The Metadata of the item to set weight for
      */
     public static void setWeight(Item item, int meta, int value) {
-        weights.put(item.getRegistryName().toString()+":"+meta, value);
+        weights.put(item.getRegistryName().toString() + ":" + meta, value);
     }
 
     /**
