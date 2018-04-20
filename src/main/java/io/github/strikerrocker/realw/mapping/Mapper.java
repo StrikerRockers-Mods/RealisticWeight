@@ -24,7 +24,8 @@ public class Mapper
             for (ItemStack stack : list) {
                 int meta = stack.getMetadata();
                 if (ConfigHandler.doMapping) {
-                    ItemWeight.setWeight(item, meta, 1);
+                    ItemWeight.setWeight(item, meta, 10);
+                    FluidMapper.mapFlluids(item);
                 } else {
                     try {
                         Map<String, Integer> newMap = JSONUtils.readFromJson(file);
