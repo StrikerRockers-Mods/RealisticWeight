@@ -25,7 +25,7 @@ public class Mapper
                 int meta = stack.getMetadata();
                 if (ConfigHandler.doMapping) {
                     ItemWeight.setWeight(item, meta, 10);
-                    FluidMapper.mapFlluids(item);
+                    FluidMapper.mapFluids(item);
                 } else {
                     try {
                         Map<String, Integer> newMap = JSONUtils.readFromJson(file);

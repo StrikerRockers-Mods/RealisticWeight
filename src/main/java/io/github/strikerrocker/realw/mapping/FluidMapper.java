@@ -14,11 +14,12 @@ import javax.annotation.Nonnull;
  */
 public class FluidMapper
 {
-    public static void mapFlluids(Item item) {
+    public static void mapFluids(Item item) {
         ItemStack stack = new ItemStack(item);
         if (isBucket(stack)) {
             FluidStack fluidStack = FluidUtil.getFluidContained(stack);
-            int density = fluidStack.getFluid().getDensity();
+            int density = 0;
+            if(fluidStack!=null) density = fluidStack.getFluid().getDensity();
             ItemWeight.setWeight(item, density);
         }
     }
