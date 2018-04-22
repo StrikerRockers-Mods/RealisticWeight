@@ -10,21 +10,21 @@ public class GameStagesSupport {
 
     public static List<String> priorityList = new ArrayList<>();
 
-    public static void load(){
+    public static void load() {
         loadConfig();
     }
 
-    public static void loadConfig(){
+    public static void loadConfig() {
         priorityList.clear();
-        for(String str : ConfigHandler.gameStagesSupportConfig.priorityList) priorityList.add(str);
+        for (String str : ConfigHandler.gameStagesSupportConfig.priorityList) priorityList.add(str);
     }
 
     public static class GameStagesSupportConfig {
         @Config.Name("Priority Method")
         @Config.Comment({"The method used to pick which stage to use",
-                        "list: use the list specified in the Priority List",
-                        "biggest: use the biggest weight",
-                        "smallest: use the smallest weight"})
+                "list: use the list specified in the Priority List",
+                "biggest: use the biggest weight",
+                "smallest: use the smallest weight"})
         public String priorityMethod = "list";
 
         @Config.Name("Priority List")

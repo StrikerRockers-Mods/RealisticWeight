@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class CapabilityEvents
-{
+public class CapabilityEvents {
 
     private static final ResourceLocation WEIGHT_CAP = new ResourceLocation(Constants.MOD_ID, "weight");
 

@@ -14,8 +14,7 @@ import net.minecraft.util.NonNullList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryListener implements IContainerListener
-{
+public class InventoryListener implements IContainerListener {
 
     private final EntityPlayerMP owner;
 

@@ -15,8 +15,7 @@ import java.util.Map;
 
 import static net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS;
 
-public class Mapper
-{
+public class Mapper {
     public static void init(File file) {
         for (Item item : ITEMS.getValuesCollection()) {
             NonNullList<ItemStack> list = NonNullList.create();

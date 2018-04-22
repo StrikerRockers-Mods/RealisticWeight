@@ -9,8 +9,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 @SuppressWarnings("unused")
 @ZenClass("mods.realisticweight")
-public class CrafttweakerSupport
-{
+public class CrafttweakerSupport {
     @ZenMethod
     public static void setWeight(IIngredient item, int weight) {
         for (IItemStack stack : item.getItems()) {
@@ -19,7 +18,7 @@ public class CrafttweakerSupport
     }
 
     @ZenMethod
-    public static void setWeight(IIngredient item, String stage, int weight){
+    public static void setWeight(IIngredient item, String stage, int weight) {
         for (IItemStack stack : item.getItems()) {
             ItemWeight.setWeightWithStage(CraftTweakerMC.getItemStack(stack), stage, weight);
         }

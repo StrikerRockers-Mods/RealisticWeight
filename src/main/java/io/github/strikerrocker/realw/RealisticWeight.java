@@ -23,8 +23,7 @@ import static io.github.strikerrocker.realw.Constants.*;
 
 @Mod(modid = MOD_ID, name = NAME, version = VERSION)
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class RealisticWeight
-{
+public class RealisticWeight {
 
     @SidedProxy(serverSide = PACKAGE_LOCATION + ".proxies.CommonProxy", clientSide = PACKAGE_LOCATION + ".proxies.ClientProxy", modId = MOD_ID)
     public static CommonProxy proxy;
@@ -33,11 +32,12 @@ public class RealisticWeight
     public static RealisticWeight instance;
     public static File PRE_GENERATED_WEIGHT_FILE;
 
-    @Mod.EventHandler
-    public void onPreInit(FMLPreInitializationEvent event) {
-        PRE_GENERATED_WEIGHT_FILE = new File(new File(event.getModConfigurationDirectory(), NAME), "Weight.json");
-        if (Loader.isModLoaded("crafttweaker")) CraftTweakerAPI.registerClass(CrafttweakerSupport.class);
-        if(Loader.isModLoaded("gamestages")) GameStagesSupport.load();
+    @SubscribeEvent
+    public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(MOD_ID)) {
+            ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
+            if (Loader.isModLoaded("gamestages")) GameStagesSupport.loadConfig();
+        }
     }
 
     @Mod.EventHandler
@@ -51,11 +51,10 @@ public class RealisticWeight
         JSONUtils.writeDefaults(PRE_GENERATED_WEIGHT_FILE);
     }
 
-    @SubscribeEvent
-    public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.getModID().equals(MOD_ID)) {
-            ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
-            if(Loader.isModLoaded("gamestages")) GameStagesSupport.loadConfig();
-        }
+    @Mod.EventHandler
+    public void onPreInit(FMLPreInitializationEvent event) {
+        PRE_GENERATED_WEIGHT_FILE = new File(new File(event.getModConfigurationDirectory(), NAME), "Weight.json");
+        if (Loader.isModLoaded("crafttweaker")) CraftTweakerAPI.registerClass(CrafttweakerSupport.class);
+        if (Loader.isModLoaded("gamestages")) GameStagesSupport.load();
     }
 }

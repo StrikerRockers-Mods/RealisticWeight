@@ -1,7 +1,6 @@
 package io.github.strikerrocker.realw.api.player_weight;
 
-public interface IWeight
-{
+public interface IWeight {
     /**
      * Add's the specifies weight to the player
      *

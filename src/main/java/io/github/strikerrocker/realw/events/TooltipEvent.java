@@ -8,8 +8,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class TooltipEvent
-{
+public class TooltipEvent {
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event) {
         if (event.getItemStack().hasCapability(WeightProvider.WEIGHT_CAP, null)) {

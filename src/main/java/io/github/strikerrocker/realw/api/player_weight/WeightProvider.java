@@ -6,8 +6,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-public class WeightProvider implements ICapabilitySerializable<NBTBase>
-{
+public class WeightProvider implements ICapabilitySerializable<NBTBase> {
 
     @CapabilityInject(IWeight.class)
     public static final Capability<IWeight> WEIGHT_CAP = null;

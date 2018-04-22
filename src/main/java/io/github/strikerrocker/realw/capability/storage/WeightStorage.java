@@ -9,8 +9,7 @@ import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
 
-public class WeightStorage implements Capability.IStorage<IWeight>
-{
+public class WeightStorage implements Capability.IStorage<IWeight> {
     @Nullable
     @Override
     public NBTBase writeNBT(Capability<IWeight> capability, IWeight instance, EnumFacing side) {

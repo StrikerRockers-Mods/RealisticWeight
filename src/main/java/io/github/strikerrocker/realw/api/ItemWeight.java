@@ -37,7 +37,7 @@ public class ItemWeight {
      */
     public static int getWeight(Item item, int meta, EntityPlayer player) {
         Weight itemWeight = weights.get(item.getRegistryName().toString() + ":" + meta);
-        if(itemWeight == null) weights.get(item.getRegistryName().toString() + ":" + "0");
+        if (itemWeight == null) weights.get(item.getRegistryName().toString() + ":" + "0");
         return itemWeight == null ? 0 : itemWeight.getWeight(player);
     }
 
@@ -67,11 +67,11 @@ public class ItemWeight {
      * @param inventory The inventory to return weight for
      * @return The weight of the inventory
      */
-    public static int getInventoryWeight(IInventory inventory, EntityPlayer player){
+    public static int getInventoryWeight(IInventory inventory, EntityPlayer player) {
         int weight = 0;
-        for(int i = 0; i < inventory.getSizeInventory(); i++){
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
-            if(!(stack==ItemStack.EMPTY) && !(stack.isEmpty())){
+            if (!(stack == ItemStack.EMPTY) && !(stack.isEmpty())) {
                 weight += getStackWeight(stack, player);
             }
         }
@@ -83,11 +83,11 @@ public class ItemWeight {
      * <p>
      * Don't use this during runtime may cause issue's
      *
-     * @param item  The item to set weight for
-     * @param value The weight to set
+     * @param item   The item to set weight for
+     * @param weight The weight to set
      */
-    public static void setWeight(Item item, int value) {
-        setWeight(item, 0, value);
+    public static void setWeight(Item item, int weight) {
+        setWeight(item, 0, weight);
     }
 
     /**
@@ -96,10 +96,10 @@ public class ItemWeight {
      * Don't use this during runtime may cause issue's
      *
      * @param itemStack The itemStack
-     * @param value     The weight
+     * @param weight    The weight
      */
-    public static void setWeight(ItemStack itemStack, int value) {
-        setWeight(itemStack.getItem(), itemStack.getMetadata(), value);
+    public static void setWeight(ItemStack itemStack, int weight) {
+        setWeight(itemStack.getItem(), itemStack.getMetadata(), weight);
     }
 
     /**
@@ -107,16 +107,16 @@ public class ItemWeight {
      * <p>
      * Don't use this during runtime may cause issue's
      *
-     * @param item  The item to set weight for
-     * @param value The weight to set for the item
-     * @param meta  The Metadata of the item to set weight for
+     * @param item   The item to set weight for
+     * @param weight The weight to set for the item
+     * @param meta   The Metadata of the item to set weight for
      */
-    public static void setWeight(Item item, int meta, int value) {
-        String key = item.getRegistryName().toString()+":"+meta;
-        if(weights.containsKey(key)){
-            weights.get(key).setDefaultWeight(value);
-        } else{
-            weights.put(key, new Weight(value));
+    public static void setWeight(Item item, int meta, int weight) {
+        String key = item.getRegistryName().toString() + ":" + meta;
+        if (weights.containsKey(key)) {
+            weights.get(key).setDefaultWeight(weight);
+        } else {
+            weights.put(key, new Weight(weight));
         }
     }
 
@@ -125,12 +125,12 @@ public class ItemWeight {
      * <p>
      * Don't use this during runtime may cause issue's
      *
-     * @param item  The item to set weight for
-     * @param stage the Stage to set the weight for
-     * @param value The weight to set
+     * @param item   The item to set weight for
+     * @param stage  the Stage to set the weight for
+     * @param weight The weight to set
      */
-    public static void setWeightWithStage(Item item, String stage, int value) {
-        setWeightWithStage(item, 0, stage, value);
+    public static void setWeightWithStage(Item item, String stage, int weight) {
+        setWeightWithStage(item, 0, stage, weight);
     }
 
     /**
@@ -139,11 +139,11 @@ public class ItemWeight {
      * Don't use this during runtime may cause issue's
      *
      * @param itemStack The itemStack
-     * @param stage the Stage to set the weight for
-     * @param value     The weight
+     * @param stage     the Stage to set the weight for
+     * @param weight    The weight
      */
-    public static void setWeightWithStage(ItemStack itemStack, String stage, int value) {
-        setWeightWithStage(itemStack.getItem(), itemStack.getMetadata(), stage, value);
+    public static void setWeightWithStage(ItemStack itemStack, String stage, int weight) {
+        setWeightWithStage(itemStack.getItem(), itemStack.getMetadata(), stage, weight);
     }
 
     /**
@@ -151,39 +151,39 @@ public class ItemWeight {
      * <p>
      * Don't use this during runtime may cause issue's
      *
-     * @param item  The item to set weight for
-     * @param meta  The Metadata of the item to set weight for
-     * @param stage the Stage to set the weight for
-     * @param value The weight to set for the item
+     * @param item   The item to set weight for
+     * @param meta   The Metadata of the item to set weight for
+     * @param stage  the Stage to set the weight for
+     * @param weight The weight to set for the item
      */
-    public static void setWeightWithStage(Item item, int meta, String stage, int value) {
-        String key = item.getRegistryName().toString()+":"+meta;
-        if(weights.containsKey(key)){
-            weights.get(key).setWeight(stage, value);
-        } else{
-            weights.put(key, new Weight(0).setWeight(stage, value));
+    public static void setWeightWithStage(Item item, int meta, String stage, int weight) {
+        String key = item.getRegistryName().toString() + ":" + meta;
+        if (weights.containsKey(key)) {
+            weights.get(key).setWeight(stage, weight);
+        } else {
+            weights.put(key, new Weight(0).setWeight(stage, weight));
         }
     }
 
     /**
      * Return's the weight map
      *
-     * @return
+     * @return Map
      */
     public static Map<String, Weight> getMap() {
         return new HashMap<>(weights);
     }
 
-    public static class Weight{
+    public static class Weight {
 
         private Map<String, Integer> weights = new HashMap<>();
         private int defaultWeight;
 
-        private Weight(int defaultWeight){
+        private Weight(int defaultWeight) {
             this.defaultWeight = defaultWeight;
         }
 
-        public Weight setDefaultWeight(int weight){
+        public void setDefaultWeight(int weight) {
             this.defaultWeight = weight;
         }
 
@@ -191,27 +191,28 @@ public class ItemWeight {
             return defaultWeight;
         }
 
-        public Weight setWeight(String stage, int weight){
+        public Weight setWeight(String stage, int weight) {
             weights.put(stage, weight);
+            return new Weight(0).setWeight(stage, weight);
         }
 
-        public Integer getWeight(String stage){
+        public Integer getWeight(String stage) {
             return weights.get(stage);
         }
 
-        public int getWeight(EntityPlayer player){
+        public int getWeight(EntityPlayer player) {
             String priorityMethod = ConfigHandler.gameStagesSupportConfig.priorityMethod;
             PlayerDataHandler.IStageData stageData = PlayerDataHandler.getStageData(player);
             int weight = getDefaultWeight();
             int priority = -1;
-            for(String stage : stageData.getUnlockedStages()) {
+            for (String stage : stageData.getUnlockedStages()) {
                 if (getWeight(stage) != null) {
                     if ("biggest".equals(priorityMethod)) {
-                        if(getWeight(stage) > weight) weight = getWeight(stage);
+                        if (getWeight(stage) > weight) weight = getWeight(stage);
                     } else if ("smallest".equals(priorityMethod)) {
-                        if(getWeight(stage) < weight) weight = getWeight(stage);
+                        if (getWeight(stage) < weight) weight = getWeight(stage);
                     } else if ("list".equals(priorityMethod)) {
-                        if(GameStagesSupport.priorityList.indexOf(stage) > priority) weight = getWeight(stage);
+                        if (GameStagesSupport.priorityList.indexOf(stage) > priority) weight = getWeight(stage);
                     }
                 }
             }
