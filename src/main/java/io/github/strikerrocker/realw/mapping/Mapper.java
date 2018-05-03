@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
+import static io.github.strikerrocker.realw.RealisticWeight.gamestages;
 import static net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS;
 
 public class Mapper {
@@ -26,11 +27,15 @@ public class Mapper {
                     ItemWeight.setWeight(item, meta, 10);
                     FluidMapper.mapFluids(item);
                 } else {
+
                     try {
-                        Map<String, Integer> newMap = JSONUtils.readFromJson(file);
-                        Integer itemWeight = newMap.get(item.getRegistryName().toString() + ":" + meta);
-                        if (itemWeight != 0) {
-                            ItemWeight.setWeight(item, meta, itemWeight);
+                        if (gamestages) {
+                            Map<String, Integer> newMap = JSONUtils.readFromJson(file);
+                            Integer itemWeight = newMap.get(item.getRegistryName().toString() + ":" + meta);
+                            if (itemWeight != 0) {
+                                ItemWeight.setWeight(item, meta, itemWeight);
+                            }
+                        } else {
                         }
                     } catch (FileNotFoundException e) {
                         System.out.print(e);

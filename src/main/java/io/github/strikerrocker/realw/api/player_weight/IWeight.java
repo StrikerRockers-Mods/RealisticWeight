@@ -23,6 +23,13 @@ public interface IWeight {
     int getWeight();
 
     /**
+     * Return's the Maximum weight of the player
+     *
+     * @return weight
+     */
+    int getMaxWeight();
+
+    /**
      * Set's the weight for the player
      *
      * @param weight weight to be set

@@ -4,6 +4,7 @@ import crafttweaker.CraftTweakerAPI;
 import io.github.strikerrocker.realw.integrations.crafttweaker.CrafttweakerSupport;
 import io.github.strikerrocker.realw.mapping.Mapper;
 import io.github.strikerrocker.realw.proxies.CommonProxy;
+import io.github.strikerrocker.realw.utils.CommandReload;
 import io.github.strikerrocker.realw.utils.JSONUtils;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
@@ -55,5 +57,10 @@ public class RealisticWeight {
     public void onPreInit(FMLPreInitializationEvent event) {
         PRE_GENERATED_WEIGHT_FILE = new File(new File(event.getModConfigurationDirectory(), NAME), "Weight.json");
         if (Loader.isModLoaded("crafttweaker")) CraftTweakerAPI.registerClass(CrafttweakerSupport.class);
+    }
+
+    @Mod.EventHandler
+    public void serverload(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandReload());
     }
 }

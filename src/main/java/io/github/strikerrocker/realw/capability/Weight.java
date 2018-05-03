@@ -1,6 +1,7 @@
 package io.github.strikerrocker.realw.capability;
 
 import io.github.strikerrocker.realw.api.player_weight.IWeight;
+import io.github.strikerrocker.realw.handlers.ConfigHandler;
 
 public class Weight implements IWeight {
     /**
@@ -38,6 +39,11 @@ public class Weight implements IWeight {
     @Override
     public int getWeight() {
         return Weight + api_weight;
+    }
+
+    @Override
+    public int getMaxWeight() {
+        return ConfigHandler.weight;
     }
 
     /**
