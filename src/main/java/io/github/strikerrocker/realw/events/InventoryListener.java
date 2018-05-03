@@ -52,11 +52,11 @@ public class InventoryListener implements IContainerListener {
             int a = 1;
             for (ItemStack stack : inventory) {
                 if (!(stack.getItem().isDamageable())) {
-                    int i = ItemWeight.getStackWeight(stack, player);
+                    int i = ItemWeight.getStackWeight(stack);
                     a = a + i;
                 } else {
                     int damage = (stack.getMaxDamage() - stack.getItemDamage()) / stack.getMaxDamage();
-                    int w = ItemWeight.getWeight(stack.getItem(), player);
+                    int w = ItemWeight.getWeight(stack.getItem());
                     a = a + w + damage;
                 }
             }

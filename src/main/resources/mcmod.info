@@ -1,18 +1,18 @@
 [
-{
-  "modid": "realw",
-  "name": "Realistic Weight",
-  "description": "Adds weight metrics to minecraft",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": [
-    "StrikerRocker"
-  ],
-  "credits": "People in MMD discord for giving the idea",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "realw",
+    "name": "Realistic Weight",
+    "description": "Adds weight metrics to minecraft",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "StrikerRocker"
+    ],
+    "credits": "People in MMD discord for giving the idea",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
 ]

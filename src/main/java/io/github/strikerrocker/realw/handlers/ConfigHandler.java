@@ -1,6 +1,5 @@
 package io.github.strikerrocker.realw.handlers;
 
-import io.github.strikerrocker.realw.integrations.gamestages.GameStagesSupport;
 import net.minecraftforge.common.config.Config;
 
 import static io.github.strikerrocker.realw.Constants.MOD_ID;
@@ -19,6 +18,4 @@ public class ConfigHandler {
     @Config.RangeInt(min = 0)
     @Config.Name("Max player weight")
     public static int weight = 10000;
-    @Config.Name("GameStagesSupport")
-    public static GameStagesSupport.GameStagesSupportConfig gameStagesSupportConfig = new GameStagesSupport.GameStagesSupportConfig();
 }

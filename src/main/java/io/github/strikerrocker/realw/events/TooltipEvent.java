@@ -13,8 +13,8 @@ public class TooltipEvent {
     public void tooltip(ItemTooltipEvent event) {
         if (event.getItemStack().hasCapability(WeightProvider.WEIGHT_CAP, null)) {
             ItemStack stack = event.getItemStack();
-            int stackWeight = ItemWeight.getStackWeight(stack, event.getEntityPlayer());
-            int itemWeight = ItemWeight.getWeight(stack.getItem(), event.getEntityPlayer());
+            int stackWeight = ItemWeight.getStackWeight(stack);
+            int itemWeight = ItemWeight.getWeight(stack.getItem());
             if (stack.getItem() instanceof ItemBlock) {
                 event.getToolTip().add(TextFormatting.YELLOW + "Block Weight" + " : " + TextFormatting.WHITE + itemWeight);
             } else

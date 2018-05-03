@@ -2,7 +2,6 @@ package io.github.strikerrocker.realw;
 
 import crafttweaker.CraftTweakerAPI;
 import io.github.strikerrocker.realw.integrations.crafttweaker.CrafttweakerSupport;
-import io.github.strikerrocker.realw.integrations.gamestages.GameStagesSupport;
 import io.github.strikerrocker.realw.mapping.Mapper;
 import io.github.strikerrocker.realw.proxies.CommonProxy;
 import io.github.strikerrocker.realw.utils.JSONUtils;
@@ -31,12 +30,13 @@ public class RealisticWeight {
     @Mod.Instance(MOD_ID)
     public static RealisticWeight instance;
     public static File PRE_GENERATED_WEIGHT_FILE;
+    public static boolean gamestages = false;
 
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(MOD_ID)) {
             ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
-            if (Loader.isModLoaded("gamestages")) GameStagesSupport.loadConfig();
+            if (Loader.isModLoaded("gamestages")) gamestages = true;
         }
     }
 
@@ -55,6 +55,5 @@ public class RealisticWeight {
     public void onPreInit(FMLPreInitializationEvent event) {
         PRE_GENERATED_WEIGHT_FILE = new File(new File(event.getModConfigurationDirectory(), NAME), "Weight.json");
         if (Loader.isModLoaded("crafttweaker")) CraftTweakerAPI.registerClass(CrafttweakerSupport.class);
-        if (Loader.isModLoaded("gamestages")) GameStagesSupport.load();
     }
 }
