@@ -69,4 +69,12 @@ public class PlayerEvents {
             iEffect.applyEffect(event.player, pWeight.getWeight(), pWeight.getMaxWeight());
         }
     }
+
+    @SubscribeEvent
+    public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        IWeight pWeight = event.player.getCapability(WeightProvider.WEIGHT_CAP, null);
+        for (IEffect iEffect : effects) {
+            iEffect.clearEffect(event.player);
+        }
+    }
 }

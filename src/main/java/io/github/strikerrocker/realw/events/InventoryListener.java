@@ -14,6 +14,8 @@ import net.minecraft.util.NonNullList;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.github.strikerrocker.realw.RealisticWeight.gamestages;
+
 public class InventoryListener implements IContainerListener {
 
     private final EntityPlayerMP owner;
@@ -49,19 +51,23 @@ public class InventoryListener implements IContainerListener {
             pWeight.setWeight(1);
             inventory.addAll(player.inventory.offHandInventory);
             inventory.addAll(player.inventory.armorInventory);
-            int a = 1;
-            for (ItemStack stack : inventory) {
-                if (!(stack.getItem().isDamageable())) {
+            if (gamestages) {
+                int a = 1;
+                for (ItemStack stack : inventory) {
+                    int i = ItemWeight.getStackWeight(stack, player);
+                    a = a + i;
+                }
+                int added = ((pWeight.getWeight() - pWeight.getApiWeight()) - a);
+                pWeight.addWeight(added);
+            } else {
+                int a = 1;
+                for (ItemStack stack : inventory) {
                     int i = ItemWeight.getStackWeight(stack);
                     a = a + i;
-                } else {
-                    int damage = (stack.getMaxDamage() - stack.getItemDamage()) / stack.getMaxDamage();
-                    int w = ItemWeight.getWeight(stack.getItem());
-                    a = a + w + damage;
                 }
+                int added = ((pWeight.getWeight() - pWeight.getApiWeight()) - a);
+                pWeight.addWeight(added);
             }
-            int added = ((pWeight.getWeight() - pWeight.getApiWeight()) - a);
-            pWeight.addWeight(added);
         }
     }
 }

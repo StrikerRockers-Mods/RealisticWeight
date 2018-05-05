@@ -41,11 +41,6 @@ public class Weight implements IWeight {
         return Weight + api_weight;
     }
 
-    @Override
-    public int getMaxWeight() {
-        return ConfigHandler.weight;
-    }
-
     /**
      * Set's the weight for the player
      *
@@ -55,6 +50,11 @@ public class Weight implements IWeight {
     public void setWeight(int weight) {
         reduceWeight(this.Weight);
         addWeight(weight);
+    }
+
+    @Override
+    public int getMaxWeight() {
+        return ConfigHandler.weight;
     }
 
     @Override

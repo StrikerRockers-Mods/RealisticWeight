@@ -51,6 +51,7 @@ public class RealisticWeight {
     @Mod.EventHandler
     public void onPostInit(FMLPostInitializationEvent event) {
         JSONUtils.writeDefaults(PRE_GENERATED_WEIGHT_FILE);
+
     }
 
     @Mod.EventHandler
